@@ -1,0 +1,56 @@
+
+# robots.txt for Tunisia Trip website
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /admin/*
+
+# ===================================
+# AI Crawlers - Explicitly Allowed for GEO (Generative Engine Optimization)
+# ===================================
+
+# OpenAI GPTBot - Used by ChatGPT and OpenAI products
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT User Plugin
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic AI (Claude)
+User-agent: Anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+# Google AI (Bard, Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft/Bing AI (Copilot)
+User-agent: Bingbot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Apple AI (Siri, etc.)
+User-agent: Applebot
+Allow: /
+
+# ===================================
+# Sitemap location
+# ===================================
+Sitemap: https://tunisiatrip.jp/sitemap.xml
+
+# Important crawl directives
+Crawl-delay: 1

@@ -1,0 +1,32 @@
+
+project_id = "bxfmhruxybcgjeufnyvd"
+
+[functions.format-article]
+verify_jwt = false
+path = "/supabase/functions/format-article"
+
+[functions.rewrite-content]
+verify_jwt = false
+path = "/supabase/functions/rewrite-content"
+
+[functions.semantic-search]
+verify_jwt = false
+path = "/supabase/functions/semantic-search"
+
+[functions.chat-assistant]
+verify_jwt = false
+path = "/supabase/functions/chat-assistant"
+
+[functions.generate-trip-pdf]
+verify_jwt = false
+path = "/supabase/functions/generate-trip-pdf"
+
+[functions.generate-presentation]
+verify_jwt = false
+path = "/supabase/functions/generate-presentation"
+
+[functions.smart-itinerary-optimizer]
+verify_jwt = false
+
+[functions.generate-social-content]
+verify_jwt = false

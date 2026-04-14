@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ9YCJJGLM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BQ9YCJJGLM');
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Discover Tunisia - Your gateway to exploring Tunisia's beautiful destinations" />
+    <meta property="og:title" content="Discover Tunisia" />
+    <meta property="og:description" content="Your gateway to exploring Tunisia's beautiful destinations" />
+    <meta property="og:image" content="/lovable-uploads/ff0d63a1-cc6c-4694-be17-2df916fd6334.png" />
+    <title>Discover Tunisia</title>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+    <script>
+      // Initialize map callback function
+      window.initMap = function() {
+        console.log("Google Maps API loaded successfully");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

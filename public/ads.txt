@@ -1,0 +1,11 @@
+
+# ads.txt file for advertising transparency
+# This file helps ensure ads.txt compliance for DSPs and advertisers
+# Format: domain, publisher_id, relationship, certification_authority_id
+
+# Add your advertising partner entries here when you have them
+# Example format:
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# adsystem.com, 12345, RESELLER, abc123
+
+# Currently no advertising partners configured

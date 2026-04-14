@@ -1,0 +1,82 @@
+
+
+[build]
+  publish = "dist"
+  command = "npm install --legacy-peer-deps && npm run build"
+
+# Edge Functions for social bot handling
+[[edge_functions]]
+  function = "social-bot-handler"
+  path = "/blog/*"
+
+# Ensure proper content type for ads.txt
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+# Long-term caching for assets with versioning
+[[headers]]
+  for = "/lovable-uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# SEO-friendly URL redirects - redirect old URLs to new SEO-friendly ones
+[[redirects]]
+  from = "/about"
+  to = "/about-tunisia"
+  status = 301
+
+[[redirects]]
+  from = "/travel"
+  to = "/travel-information"
+  status = 301
+
+[[redirects]]
+  from = "/atlantis"
+  to = "/company-information"
+  status = 301
+
+[[redirects]]
+  from = "/blog/article/*"
+  to = "/blog/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/admin/blog"
+  to = "/admin/blog-management"
+  status = 301
+
+[[redirects]]
+  from = "/admin/trip"
+  to = "/admin/trip-management"
+  status = 301
+
+[[redirects]]
+  from = "/admin/contacts"
+  to = "/admin/contact-management"
+  status = 301
+
+[[redirects]]
+  from = "/admin/seo"
+  to = "/admin/seo-management"
+  status = 301
+
+[[redirects]]
+  from = "/admin/media"
+  to = "/admin/media-management"
+  status = 301
+
+# URL structure optimization - redirect underscored URLs to hyphenated ones
+[[redirects]]
+  from = "/*_*"
+  to = "/:splat"
+  status = 301
+  force = false
+  conditions = {Query = {}}
+
+# Main SPA redirect (must be last)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
