@@ -1,69 +1,67 @@
-# Welcome to your External project
+# TunisiaTrip (チュニジア旅行)
 
-## Project info
+TunisiaTrip is a premium, modern travel guide and management platform dedicated to showcasing the beauty and culture of Tunisia. Architected with a **Japanese-first philosophy**, this application provides a seamless, localized experience for Japanese travelers exploring Tunisia.
 
-**URL**: https://external.dev/projects/287cefcd-d42f-490f-8959-698635fc15c1
+## 🇯🇵 Japanese-First Localization
+Built from the ground up for the Japanese market, the project features a custom-built localization architecture.
+- **100% Japanese Coverage**: Every interface, from the discovery pages to the administrative dashboard, is fully translated.
+- **Custom Localization Hook**: A robust `useTranslation` system that manages static translations, dynamic API-driven content, and persistent user preferences.
+- **Intelligent Search**: A localized search engine that understands both English and Japanese keywords, providing relevant results with localized metadata.
 
-## How can I edit this code?
+## 🚀 Technology Stack
 
-There are several ways of editing your application.
+### Frontend Core
+- **React 18**: Utilizing functional components and modern hooks for a reactive user interface.
+- **TypeScript**: Ensuring end-to-end type safety, making the codebase maintainable and reducing runtime errors.
+- **Vite**: Providing an exceptionally fast development experience and optimized production builds.
 
-**Use External**
+### UI & Styling
+- **Tailwind CSS**: A utility-first CSS framework for rapid development and consistent design across all components.
+- **Lucide React**: A clean and consistent icon set optimized for modern web applications.
+- **Radix UI**: Accessible, unstyled UI primitives used to build high-quality interactive components.
+- **Modern Typography**: Carefully selected fonts (Inter, Roboto, or Outfit) to ensure readability and a premium feel.
 
-Simply visit the [External Project](https://external.dev/projects/287cefcd-d42f-490f-8959-698635fc15c1) and start prompting.
+### Connectivity & Backend
+- **Supabase**: A powerful PostgreSQL-based backend-as-a-service providing authentication, real-time database capabilities, and secure file storage.
+- **TanStack Query (React Query)**: Managing server state with powerful caching, synchronization, and error-handling capabilities.
+- **React Router**: Client-side routing for single-page application navigation.
 
-Changes made via External will be committed automatically to this repo.
+## 💪 Strengths & Architectural Rationale
 
-**Use your preferred IDE**
+1. **Robust Type Safety**: Using **TypeScript** allowed us to define clear interfaces for complex data structures like itineraries and localized search results, significantly improving developer productivity and code reliability.
+2. **Component-Based Architecture**: **React**'s component model enabled us to build a reusable design system, ensuring visual consistency between the public-facing travel guide and the internal administrative tools.
+3. **Speed of Development**: The combination of **Vite** and **Tailwind CSS** allowed for near-instant feedback during the development process, enabling rapid iteration on UI/UX components.
+4. **Localization Excellence**: By using a **custom translation system** instead of generic libraries, we were able to implement site-specific logic such as domain-based language detection and intelligent Japanese text analysis (using Kuroshiro).
+5. **Modern Backend Integration**: **Supabase** removed the need for separate server management, allowing us to focus entirely on building high-quality user features.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in External.
+## ✨ Key Features
+- **Dynamic Travel Directory**: Explore cities, activities, and accommodations in Tunisia.
+- **AI-Enhanced Search**: Find exactly what you're looking for with an intelligent, multi-lingual search interface.
+- **Comprehensive Admin Dashboard**: Manage blog posts, travel packages, and user inquiries with ease.
+- **SEO Optimized**: Advanced SEO management tools built directly into the administrative panel.
+- **Mobile First**: Fully responsive design that ensures a premium experience on any device.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠️ Getting Started
 
-Follow these steps:
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file with your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [External](https://external.dev/projects/287cefcd-d42f-490f-8959-698635fc15c1) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.external.dev/tips-tricks/custom-domain/)
+---
+Built with ❤️ for Tunisia and its guests.

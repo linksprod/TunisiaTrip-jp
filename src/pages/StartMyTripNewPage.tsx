@@ -11,6 +11,7 @@ import { useActivities } from "@/hooks/useActivities";
 import { useHotels } from "@/hooks/useHotels";
 import { useGuestHouses } from "@/hooks/useGuestHouses";
 import { Sparkles } from "lucide-react";
+import { PageSEO } from "@/components/common/PageSEO";
 
 export const StartMyTripNewPage = () => {
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
@@ -26,10 +27,10 @@ export const StartMyTripNewPage = () => {
   const [arrivalDate, setArrivalDate] = useState<Date>();
   const [currentWorkflowStep, setCurrentWorkflowStep] = useState<'activities' | 'accommodations' | 'dates' | 'generation'>('activities');
   const [selectedTheme, setSelectedTheme] = useState("all");
-  
+
   const { currentLanguage } = useTranslation();
   const mapRef = useRef<HTMLDivElement>(null);
-  
+
   const { activities = [], isLoading: activitiesLoading } = useActivities();
   const { hotels = [], isLoading: hotelsLoading } = useHotels();
   const { guestHouses = [], isLoading: guestHousesLoading } = useGuestHouses();
@@ -47,7 +48,7 @@ export const StartMyTripNewPage = () => {
       ...prev,
       [day]: prev[day] ? [...prev[day], activityId] : [activityId]
     }));
-    
+
     if (!selectedActivities.includes(activityId)) {
       setSelectedActivities(prev => [...prev, activityId]);
     }
@@ -58,12 +59,12 @@ export const StartMyTripNewPage = () => {
       ...prev,
       [day]: prev[day]?.filter(id => id !== activityId) || []
     }));
-    
+
     // Check if activity is used in other days
-    const stillUsed = Object.values(activitiesByDay).some(dayActivities => 
+    const stillUsed = Object.values(activitiesByDay).some(dayActivities =>
       dayActivities?.includes(activityId)
     );
-    
+
     if (!stillUsed) {
       setSelectedActivities(prev => prev.filter(id => id !== activityId));
     }
@@ -92,7 +93,7 @@ export const StartMyTripNewPage = () => {
   };
 
   // Calculate number of days between check-in and check-out
-  const numberOfDays = checkInDate && checkOutDate 
+  const numberOfDays = checkInDate && checkOutDate
     ? Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24))
     : 7; // Default to 7 days if no dates selected
 
@@ -117,6 +118,12 @@ export const StartMyTripNewPage = () => {
 
   return (
     <MainLayout showTagBar={false}>
+      <PageSEO
+        title="チュニジア旅行プランナー｜カスタム旅行を作成 | TunisiaTrip"
+        description="あなただけのチュニジア旅行プランを作成。アクティビティ選択、ホテル・ゲストハウス予約、出発空港設定まで、ワンストップで旅程を組み立てられます。"
+        canonicalPath="/start-my-trip"
+        keywords="チュニジア旅行プラン, チュニジア旅程作成, チュニジアツアー予約, チュニジア旅行計画, オーダーメイド旅行"
+      />
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
         {/* Page Title Section */}
         <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8">
@@ -138,7 +145,7 @@ export const StartMyTripNewPage = () => {
           <PhotoBanner />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
         </div>
-        
+
         {/* Header Section */}
         <div className="bg-background border-b border-border shadow-sm">
           {/* Trip Style Selection Section */}
@@ -152,19 +159,19 @@ export const StartMyTripNewPage = () => {
               </p>
             </div>
           </div>
-          
+
           {/* Airbnb Style Search Bar Section */}
           <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 pb-8">
-            <AirbnbStyleSearchBar 
-              onSearch={handleSearch} 
-              selectedTheme={selectedTheme} 
+            <AirbnbStyleSearchBar
+              onSearch={handleSearch}
+              selectedTheme={selectedTheme}
               onThemeChange={setSelectedTheme}
               initialCheckIn={checkInDate}
               initialCheckOut={checkOutDate}
             />
           </div>
         </div>
-        
+
         {/* Main content area - 40/60 Split Layout */}
         <div className="flex bg-background mb-8 lg:flex-row flex-col gap-0">
           {/* Left Sidebar - 40% width */}
@@ -192,10 +199,10 @@ export const StartMyTripNewPage = () => {
               onDaySelect={setSelectedDay}
               onNextStep={handleNextStep}
               onAirportSelect={setSelectedAirport}
-              onHotelSelect={(hotelId) => setSelectedHotels(prev => 
+              onHotelSelect={(hotelId) => setSelectedHotels(prev =>
                 prev.includes(hotelId) ? prev.filter(id => id !== hotelId) : [...prev, hotelId]
               )}
-              onGuestHouseSelect={(guestHouseId) => setSelectedGuestHouses(prev => 
+              onGuestHouseSelect={(guestHouseId) => setSelectedGuestHouses(prev =>
                 prev.includes(guestHouseId) ? prev.filter(id => id !== guestHouseId) : [...prev, guestHouseId]
               )}
               onAccommodationSelect={handleAccommodationSelect}

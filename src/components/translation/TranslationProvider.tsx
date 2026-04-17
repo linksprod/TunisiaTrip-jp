@@ -38,22 +38,30 @@ export function TranslationProvider({
     lastError
   } = useTranslationApi();
   const [showSettings, setShowSettings] = useState(false);
-  const [isInitializing, setIsInitializing] = useState(true);
+
+  // Detect true server (SSR) environment — the global flag is set by prerender.ts
+  // We cannot use `typeof window === 'undefined'` because prerender.ts mocks window
+  const isSSR = typeof (globalThis as any).__isServer__ !== 'undefined';
+
+  // Only delay rendering in the actual browser (not SSR)
+  const [isInitializing, setIsInitializing] = useState(!isSSR);
 
   // Simulate a short initialization period without showing any loading UI
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitializing(false);
-    }, 800);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!isSSR) {
+      const timer = setTimeout(() => {
+        setIsInitializing(false);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [isSSR]);
 
   const toggleSettings = () => {
     setShowSettings(prev => !prev);
   };
 
-  // Don't show any loading state, let the main LoadingScreen handle it
-  if (isInitializing) {
+  // Don't show any loading state in the browser during initialization
+  if (isInitializing && !isSSR) {
     return null;
   }
 
@@ -66,7 +74,7 @@ export function TranslationProvider({
   return (
     <TranslationContext.Provider value={contextValue}>
       {children}
-      
+
       {showSettings && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
@@ -88,7 +96,7 @@ export function TranslationProvider({
           </div>
         </div>
       )}
-      
+
       {isTranslating && (
         <div className="fixed bottom-16 right-4 bg-white rounded-md shadow-md py-1 px-3 z-40 flex items-center gap-2">
           <Loader2 size={14} className="animate-spin text-blue-500" />

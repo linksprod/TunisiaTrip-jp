@@ -17,9 +17,12 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Add a cache to prevent repeated admin checks
-let adminStatusCache: {[key: string]: boolean} = {};
+let adminStatusCache: { [key: string]: boolean } = {};
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  if (typeof window === 'undefined') {
+    console.log('[SSR] AuthProvider: Rendering on server');
+  }
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,33 +39,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAdmin(adminStatusCache[userId]);
         return;
       }
-      
+
       console.log('Checking admin status for user:', userId);
-      
+
       // Use the security definer function to avoid RLS recursion
       const { data, error } = await supabase.rpc('is_user_admin', {
         user_id: userId
       });
-      
+
       if (error) {
         console.error('Error checking admin status:', error);
         setIsAdmin(false);
         return;
       }
-      
+
       console.log('User admin status response:', data);
       const isAdminValue = data ?? false;
-      
+
       // Cache the result
       adminStatusCache[userId] = isAdminValue;
       setIsAdmin(isAdminValue);
-      
+
     } catch (error) {
       console.error('Exception checking admin status:', error);
       setIsAdmin(false);
     }
   };
-  
+
   // Clear cache on logout
   const clearCache = () => {
     adminStatusCache = {};
@@ -72,20 +75,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Set initial loading state
     setIsLoading(true);
     console.log('AuthProvider: Initializing auth state at', new Date().toISOString());
-    
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, newSession) => {
         console.log('Auth state changed:', event);
-        
+
         if (event === 'SIGNED_OUT') {
           clearCache();
         }
-        
+
         // Always update the session and user state immediately
         setSession(newSession);
         setUser(newSession?.user ?? null);
-        
+
         // Fetch admin status if we have a user
         if (newSession?.user) {
           // Use setTimeout to avoid Supabase auth deadlocks
@@ -95,7 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         } else {
           setIsAdmin(null);
         }
-        
+
         // Only set loading to false after all checks
         setIsLoading(false);
       }
@@ -104,14 +107,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // THEN check for existing session
     supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
       console.log('Got existing session:', currentSession ? 'yes' : 'no');
-      
+
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
-      
+
       if (currentSession?.user) {
         // Immediate feedback that user is logged in
         setIsLoading(false);
-        
+
         // Then check admin status in the background
         checkAdminStatus(currentSession.user.id);
       } else {
@@ -130,19 +133,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       console.log('Attempting to sign in with email:', email);
-      
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
+
       if (error) throw error;
-      
+
       toast({
         title: "Signed in successfully",
         description: "Welcome back!"
       });
-      
+
       // Don't need to manually update state or navigate, the auth state listener will handle it
     } catch (error: any) {
       console.error('Error signing in:', error);
@@ -164,9 +167,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email,
         password,
       });
-      
+
       if (error) throw error;
-      
+
       toast({
         title: "Account created",
         description: "Please check your email for verification instructions.",
@@ -187,16 +190,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       await supabase.auth.signOut();
-      
+
       // Clear all auth state
       setUser(null);
       setSession(null);
       setIsAdmin(null);
-      
+
       toast({
         title: "Signed out successfully"
       });
-      
+
       navigate('/auth');
     } catch (error: any) {
       console.error('Error signing out:', error);
@@ -211,14 +214,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      session, 
-      isAdmin, 
-      isLoading, 
-      signIn, 
-      signUp, 
-      signOut 
+    <AuthContext.Provider value={{
+      user,
+      session,
+      isAdmin,
+      isLoading,
+      signIn,
+      signUp,
+      signOut
     }}>
       {children}
     </AuthContext.Provider>

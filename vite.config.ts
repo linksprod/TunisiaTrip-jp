@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => ({
   },
   // Configure static file serving for ads.txt
   publicDir: 'public',
+  ssr: {
+    noExternal: ['react-helmet-async', 'react-router-dom'],
+  },
   build: {
     rollupOptions: {
       output: {

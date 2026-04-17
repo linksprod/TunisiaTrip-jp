@@ -3,6 +3,7 @@ import { MainLayout } from "@/layouts/MainLayout";
 import { TravelHero } from "@/components/travel/TravelHero";
 import { TravelContent } from "@/components/travel/TravelContent";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { PageSEO } from "@/components/common/PageSEO";
 
 const TravelInformationPage = () => {
   const location = useLocation();
@@ -13,12 +14,12 @@ const TravelInformationPage = () => {
   useEffect(() => {
     // Immediately set page as ready to reduce perceived loading time
     setPageReady(true);
-    
+
     // Check for section parameter first (higher priority)
     const section = searchParams.get('section');
     const tab = searchParams.get('tab');
     const modeIndex = searchParams.get('mode');
-    
+
     // If we have a tab parameter, use it
     if (tab && ['itinerary', 'departure', 'activities', 'hotels', 'transportation'].includes(tab)) {
       setActiveTab(tab);
@@ -68,7 +69,7 @@ const TravelInformationPage = () => {
     const handleTabChange = (event: CustomEvent) => {
       if (event.detail && event.detail.tab) {
         setActiveTab(event.detail.tab);
-        
+
         // Update URL with new tab parameter
         const newParams = new URLSearchParams(searchParams.toString());
         newParams.set('tab', event.detail.tab);
@@ -91,6 +92,12 @@ const TravelInformationPage = () => {
 
   return (
     <MainLayout showTagBar={true}>
+      <PageSEO
+        title="チュニジア旅行情報｜旅程・アクティビティ・ホテル・交通 | TunisiaTrip"
+        description="チュニジア音旅行に役立つ実用情報。カスタム旅程プラン、サハラ砂漠・ビーチなどのアクティビティ、ホテル・ゲストハウス予約、タクシー・バス・鉄道などの交通手段を包抬紹介。"
+        canonicalPath="/travel-information"
+        keywords="チュニジア旅程, チュニジアアクティビティ, チュニジアホテル, チュニジア交通, サハラ砂漠ツアー, チュニジアゲストハウス, チュニジア出発情報"
+      />
       <div className={`transition-opacity duration-200 ${pageReady ? 'opacity-100' : 'opacity-0'}`}>
         <TravelHero />
         <TravelContent initialTab={activeTab} />
