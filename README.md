@@ -8,7 +8,7 @@ Built from the ground up for the Japanese market, the project features a custom-
 - **Custom Localization Hook**: A robust `useTranslation` system that manages static translations, dynamic API-driven content, and persistent user preferences.
 - **Intelligent Search**: A localized search engine that understands both English and Japanese keywords, providing relevant results with localized metadata.
 
-## 🚀 Technology Stack
+##  Technology Stack
 
 ### Frontend Core
 - **React 18**: Utilizing functional components and modern hooks for a reactive user interface.
@@ -26,7 +26,7 @@ Built from the ground up for the Japanese market, the project features a custom-
 - **TanStack Query (React Query)**: Managing server state with powerful caching, synchronization, and error-handling capabilities.
 - **React Router**: Client-side routing for single-page application navigation.
 
-## 💪 Strengths & Architectural Rationale
+##  Strengths & Architectural Rationale
 
 1. **Robust Type Safety**: Using **TypeScript** allowed us to define clear interfaces for complex data structures like itineraries and localized search results, significantly improving developer productivity and code reliability.
 2. **Component-Based Architecture**: **React**'s component model enabled us to build a reusable design system, ensuring visual consistency between the public-facing travel guide and the internal administrative tools.
@@ -34,14 +34,14 @@ Built from the ground up for the Japanese market, the project features a custom-
 4. **Localization Excellence**: By using a **custom translation system** instead of generic libraries, we were able to implement site-specific logic such as domain-based language detection and intelligent Japanese text analysis (using Kuroshiro).
 5. **Modern Backend Integration**: **Supabase** removed the need for separate server management, allowing us to focus entirely on building high-quality user features.
 
-## ✨ Key Features
+##  Key Features
 - **Dynamic Travel Directory**: Explore cities, activities, and accommodations in Tunisia.
 - **AI-Enhanced Search**: Find exactly what you're looking for with an intelligent, multi-lingual search interface.
 - **Comprehensive Admin Dashboard**: Manage blog posts, travel packages, and user inquiries with ease.
 - **SEO Optimized**: Advanced SEO management tools built directly into the administrative panel.
 - **Mobile First**: Fully responsive design that ensures a premium experience on any device.
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher)
@@ -64,4 +64,4 @@ Built from the ground up for the Japanese market, the project features a custom-
    ```
 
 ---
-Built with ❤️ for Tunisia and its guests.
+Built By Links.
